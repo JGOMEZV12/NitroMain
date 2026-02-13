@@ -19,6 +19,7 @@ import { HcCenterView } from '../hc-center/HcCenterView';
 import { HelpView } from '../help/HelpView';
 import { HotelView } from '../hotel-view/HotelView';
 import { InventoryView } from '../inventory/InventoryView';
+import { InventoryRPView } from '../inventory/views/rp/InventoryRPView';
 import { ModToolsView } from '../mod-tools/ModToolsView';
 import { NavigatorView } from '../navigator/NavigatorView';
 import { NitrobubbleHiddenView } from '../nitrobubblehidden/NitrobubbleHiddenView';
@@ -103,6 +104,7 @@ export const MainView: FC<{}> = props =>
             <NavigatorView />
             <NitrobubbleHiddenView />
             <InventoryView />
+            <InventoryRPView />
             <CatalogView />
             <FriendsView />
             <RightSideView />

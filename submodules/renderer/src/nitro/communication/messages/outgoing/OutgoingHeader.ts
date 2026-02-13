@@ -472,4 +472,7 @@ export class OutgoingHeader
 	public static FURNITURE_PICKUP_ALL = 10017;
 	public static DELETE_ITEM = 10018;
 	public static FURNITURE_FLOOR_POSITION_UPDATE = 10019;
+    public static GET_RP_INVENTORY = 5300;
+    public static EQUIP_RP_ITEM = 5301;
+    public static UNEQUIP_RP_ITEM = 5302;
 }
