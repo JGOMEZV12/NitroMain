@@ -82,7 +82,7 @@ export const InventoryRPView: FC<{}> = props =>
 const EquippedSlot: FC<{ item: IRPInventoryItemData, onClick: () => void }> = ({ item, onClick }) =>
 {
     return (
-        <LayoutGridItem itemActive={ false } className="equipped-slot" onClick={ onClick } itemImage={ item ? `images/items/${ item.name }.png` : undefined } itemCount={ item?.cantidad || 1 } itemCountMinimum={ 1 }>
+        <LayoutGridItem itemActive={ false } className="equipped-slot" onClick={ onClick } itemImage={ item ? `images/items/${ item.name }.png` : undefined } itemCount={ item?.cantidad || 0 } itemCountMinimum={ 1 }>
         </LayoutGridItem>
     );
 }
