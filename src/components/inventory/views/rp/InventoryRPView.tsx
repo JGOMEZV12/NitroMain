@@ -42,14 +42,16 @@ export const InventoryRPView: FC<{}> = props =>
         return () => RemoveLinkEventTracker(linkTracker);
     }, []);
 
-    const equippedWeapon = items.find(item => item.equipado && item.tipo === 'weapon');
-    const equippedArmor = items.find(item => item.equipado && item.tipo === 'armor');
+    const isEquipped = (item: any) => (typeof item.equipado === 'function' ? item.equipado() : item.equipado);
+
+    const equippedWeapon = items.find(item => isEquipped(item) && item.tipo === 'weapon');
+    const equippedArmor = items.find(item => isEquipped(item) && item.tipo === 'armor');
 
     const onItemClick = (item: IRPInventoryItemData) =>
     {
         if(!item.equipable) return;
 
-        if(item.equipado)
+        if(isEquipped(item))
         {
             unequipItem(item);
         }
@@ -70,7 +72,7 @@ export const InventoryRPView: FC<{}> = props =>
                     <EquippedSlot item={ equippedArmor } onClick={ () => equippedArmor && unequipItem(equippedArmor) } />
                 </Flex>
                 <AutoGrid gap={ 1 } columnCount={ 5 }>
-                    { items.filter(item => !item.equipado).map(item => (
+                    { items.filter(item => !isEquipped(item)).map(item => (
                         <RPItemView key={ item.id } item={ item } onClick={ () => onItemClick(item) } />
                     )) }
                 </AutoGrid>

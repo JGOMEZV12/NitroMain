@@ -12,7 +12,17 @@ const useRPInventoryState = () =>
     useMessageEvent<RPInventoryEvent>(RPInventoryEvent, event =>
     {
         const parser = event.getParser();
-        setItems([ ...parser.items ]);
+
+        setItems(parser.items.map(item => ({
+            id: item.id,
+            name: item.name,
+            cantidad: item.cantidad,
+            tipo: item.tipo,
+            equipable: item.equipable,
+            equipado_state: item.equipado,
+            // satisfy user requirement for equipado() method
+            equipado: function() { return this.equipado_state; }
+        } as any)));
     });
 
     const updateInventory = useCallback(() =>
@@ -24,14 +34,14 @@ const useRPInventoryState = () =>
     {
         SendMessageComposer(new EquipRPItemComposer(item.id));
         // Optimistic update
-        setItems(prevItems => prevItems.map(i => (i.id === item.id) ? { ...i, equipado: true } : i));
+        setItems(prevItems => prevItems.map(i => (i.id === item.id) ? { ...i, equipado_state: true } : i));
     }, []);
 
     const unequipItem = useCallback((item: IRPInventoryItemData) =>
     {
         SendMessageComposer(new UnequipRPItemComposer(item.id));
         // Optimistic update
-        setItems(prevItems => prevItems.map(i => (i.id === item.id) ? { ...i, equipado: false } : i));
+        setItems(prevItems => prevItems.map(i => (i.id === item.id) ? { ...i, equipado_state: false } : i));
     }, []);
 
     useEffect(() =>

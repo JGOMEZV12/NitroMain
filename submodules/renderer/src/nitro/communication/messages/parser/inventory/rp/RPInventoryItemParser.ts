@@ -26,4 +26,9 @@ export class RPInventoryItemParser implements IRPInventoryItemData {
     public get tipo(): string { return this._tipo; }
     public get equipable(): boolean { return this._equipable; }
     public get equipado(): boolean { return this._equipado; }
+
+    // satisfy user requirement for equipado() method
+    public isEquipped(): boolean {
+        return this._equipado;
+    }
 }
